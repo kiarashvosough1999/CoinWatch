@@ -6,37 +6,17 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DE076C542DDE3540008970FC /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = DE076C532DDE3540008970FC /* Resolver */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		DE076BFF2DDE1971008970FC /* CoinWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		DE076C382DDE226F008970FC /* Exceptions for "CoinWatch" folder in "CoinWatch" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				DetailFeature/UseCases/CoinDetailUseCase/CoinDetailUseCaseProtocol.swift,
-			);
-			target = DE076BFE2DDE1971008970FC /* CoinWatch */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		DE076C392DDE226F008970FC /* Exceptions for "CoinWatch" folder in "Copy Bundle Resources" phase from "CoinWatch" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = DE076BFD2DDE1971008970FC /* Resources */;
-			membershipExceptions = (
-				DetailFeature/UseCases/CoinDetailUseCase/CoinDetailUseCaseProtocol.swift,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		DE076C012DDE1971008970FC /* CoinWatch */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				DE076C382DDE226F008970FC /* Exceptions for "CoinWatch" folder in "CoinWatch" target */,
-				DE076C392DDE226F008970FC /* Exceptions for "CoinWatch" folder in "Copy Bundle Resources" phase from "CoinWatch" target */,
-			);
 			path = CoinWatch;
 			sourceTree = "<group>";
 		};
@@ -47,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE076C542DDE3540008970FC /* Resolver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +70,7 @@
 			);
 			name = CoinWatch;
 			packageProductDependencies = (
+				DE076C532DDE3540008970FC /* Resolver */,
 			);
 			productName = CoinWatch;
 			productReference = DE076BFF2DDE1971008970FC /* CoinWatch.app */;
@@ -118,6 +100,9 @@
 			);
 			mainGroup = DE076BF62DDE1971008970FC;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				DE076C522DDE3540008970FC /* XCRemoteSwiftPackageReference "Resolver" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DE076C002DDE1971008970FC /* Products */;
 			projectDirPath = "";
@@ -348,6 +333,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DE076C522DDE3540008970FC /* XCRemoteSwiftPackageReference "Resolver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Resolver";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DE076C532DDE3540008970FC /* Resolver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE076C522DDE3540008970FC /* XCRemoteSwiftPackageReference "Resolver" */;
+			productName = Resolver;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DE076BF72DDE1971008970FC /* Project object */;
 }
