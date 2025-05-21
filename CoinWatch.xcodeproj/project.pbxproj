@@ -10,9 +10,33 @@
 		DE076BFF2DDE1971008970FC /* CoinWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		DE076C382DDE226F008970FC /* Exceptions for "CoinWatch" folder in "CoinWatch" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				DetailFeature/UseCases/CoinDetailUseCase/CoinDetailUseCaseProtocol.swift,
+			);
+			target = DE076BFE2DDE1971008970FC /* CoinWatch */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		DE076C392DDE226F008970FC /* Exceptions for "CoinWatch" folder in "Copy Bundle Resources" phase from "CoinWatch" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = DE076BFD2DDE1971008970FC /* Resources */;
+			membershipExceptions = (
+				DetailFeature/UseCases/CoinDetailUseCase/CoinDetailUseCaseProtocol.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		DE076C012DDE1971008970FC /* CoinWatch */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				DE076C382DDE226F008970FC /* Exceptions for "CoinWatch" folder in "CoinWatch" target */,
+				DE076C392DDE226F008970FC /* Exceptions for "CoinWatch" folder in "Copy Bundle Resources" phase from "CoinWatch" target */,
+			);
 			path = CoinWatch;
 			sourceTree = "<group>";
 		};
