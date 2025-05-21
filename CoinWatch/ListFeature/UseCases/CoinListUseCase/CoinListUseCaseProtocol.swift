@@ -13,10 +13,3 @@ protocol CoinListUseCaseProtocol {
 
     func initialize()
 }
-
-enum CoinListStates: Equatable {
-    case idle
-    case loading
-    case loaded(coins: [CoinEntity])
-    case error
-}

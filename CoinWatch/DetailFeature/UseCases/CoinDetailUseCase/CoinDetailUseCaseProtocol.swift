@@ -14,10 +14,3 @@ protocol CoinDetailUseCaseProtocol {
     func initialize()
 }
 
-enum CoinDetailStates: Equatable {
-    case idle
-    case loading
-    case loaded(coins: [CoinDetailEntity])
-    case error
-}
-
