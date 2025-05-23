@@ -11,5 +11,5 @@ enum CoinListStates {
     case idle
     case loading
     case loaded(coins: [CoinEntity])
-    case error(LocalizedError)
+    case error(LocalizedError, retry: () -> Void)
 }

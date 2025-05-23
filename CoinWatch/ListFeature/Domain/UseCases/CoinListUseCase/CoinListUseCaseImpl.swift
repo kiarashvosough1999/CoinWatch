@@ -29,6 +29,7 @@ extension CoinListUseCaseImpl: CoinListUseCaseProtocol {
     }
 
     func initialize() {
+        stateSubject.send(.loading)
         cancellable = Timer
             .publish(every: 60, on: RunLoop.main, in: .common)
             .autoconnect()
@@ -49,31 +50,21 @@ extension CoinListUseCaseImpl: CoinListUseCaseProtocol {
                 case .failure:
                     stateSubject.send(
                         .error(
-                            CoinListUseCaseError.networkError
+                            CoinListUseCaseError.networkError,
+                            retry: { [weak self] in
+                                guard let self else { return }
+                                initialize()
+                            }
                         )
                     )
                 }
-            } receiveValue: { [weak stateSubject] _ in
+            } receiveValue: { [weak stateSubject] coins in
                 guard let stateSubject else { return }
-                stateSubject.send(.idle)
+                stateSubject.send(
+                    .loaded(
+                        coins: coins
+                    )
+                )
             }
-    }
-
-    func retry() async throws {
-        let stream = statePublisher
-            .timeout(
-                .seconds(2),
-                scheduler: DispatchQueue.global(qos: .userInitiated)
-            )
-            .values
-
-        for try await state in stream {
-            switch state {
-            case .idle, .loading, .loaded:
-                throw CoinListUseCaseError.invalidStateToReply
-            case .error:
-                initialize()
-            }
-        }
     }
 }
