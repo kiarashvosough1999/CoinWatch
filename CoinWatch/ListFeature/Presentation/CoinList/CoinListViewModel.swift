@@ -13,6 +13,7 @@ final class CoinListViewModel: ObservableObject {
     @LazyInjected private var listUseCase: CoinListUseCaseProtocol
 
     @Published private(set) var state: CoinListStates = .idle
+    @Published private(set) var errorState: ErrorViewState?
 
     init() {
         listUseCase
@@ -20,15 +21,17 @@ final class CoinListViewModel: ObservableObject {
             .assign(to: &$state)
         listUseCase.initialize()
     }
-    
-    func onTapRetry() {
-        Task.detached(priority: .userInitiated) {
-            @LazyInjected var listUseCase: CoinListUseCaseProtocol
-            do {
+
+    func onTapRetry() async {
+        do {
+            try await Task.detached(priority: .userInitiated) {
+                @LazyInjected var listUseCase: CoinListUseCaseProtocol
                 try await listUseCase.retry()
-            } catch {
-                
-            }
+            }.value
+        } catch let error as LocalizedError {
+            errorState = .from(error)
+        } catch {
+            errorState = .generic()
         }
     }
 }

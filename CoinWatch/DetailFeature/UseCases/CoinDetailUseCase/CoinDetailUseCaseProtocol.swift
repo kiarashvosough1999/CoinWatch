@@ -16,4 +16,3 @@ protocol CoinDetailUseCaseProtocol {
     
     func retry() async throws
 }
-

@@ -26,10 +26,15 @@ struct CoinDetailsView: View {
             case .loaded(let coin):
                 coinDetail(coin)
             case .error(let error):
-                ErrorView(errorText: error.failureReason) {
-                    viewModel.onTapRetry()
+                ErrorView(state: .from(error, canRetry: true)) {
+                    Task {
+                        await viewModel.onTapRetry()
+                    }
                 }
             }
+        }
+        .overlay {
+            errorView
         }
     }
 
@@ -38,6 +43,13 @@ struct CoinDetailsView: View {
             CoinDetailView(coin: coin)
         }
         .listStyle(.grouped)
+    }
+
+    @ViewBuilder
+    private var errorView: some View {
+        if let errorState = viewModel.errorState {
+            ErrorView(state: errorState, onTapRetry: {})
+        }
     }
 }
 

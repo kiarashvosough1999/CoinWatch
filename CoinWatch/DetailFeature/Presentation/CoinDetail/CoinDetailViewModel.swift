@@ -13,6 +13,7 @@ final class CoinDetailViewModel: ObservableObject {
     @LazyInjected private var detailUseCase: CoinDetailUseCaseProtocol
 
     @Published private(set) var state: CoinDetailStates = .idle
+    @Published private(set) var errorState: ErrorViewState?
 
     private let date: Date
 
@@ -24,14 +25,16 @@ final class CoinDetailViewModel: ObservableObject {
         detailUseCase.initialize(date: date)
     }
 
-    func onTapRetry() {
-        Task.detached(priority: .userInitiated) {
-            @LazyInjected var detailUseCase: CoinDetailUseCaseProtocol
-            do {
+    func onTapRetry() async {
+        do {
+            try await Task.detached(priority: .userInitiated) {
+                @LazyInjected var detailUseCase: CoinDetailUseCaseProtocol
                 try await detailUseCase.retry()
-            } catch {
-                
-            }
+            }.value
+        } catch let error as LocalizedError {
+            errorState = .from(error)
+        } catch {
+            errorState = .generic()
         }
     }
 }
