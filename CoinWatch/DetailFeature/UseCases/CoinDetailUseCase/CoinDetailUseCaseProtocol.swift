@@ -6,11 +6,13 @@
 //
 
 import Combine
+import Foundation
 
 protocol CoinDetailUseCaseProtocol {
 
     var statePublisher: AnyPublisher<CoinDetailStates, Never> { get }
 
-    func initialize()
+    func initialize(date: Date)
+    
+    func retry() async throws
 }
-

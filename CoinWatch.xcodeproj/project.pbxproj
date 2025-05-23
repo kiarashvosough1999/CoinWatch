@@ -7,17 +7,49 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DE076C542DDE3540008970FC /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = DE076C532DDE3540008970FC /* Resolver */; };
+		DE1AAF162DE108330078FF7B /* Resolver-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = DE1AAF152DE108330078FF7B /* Resolver-Dynamic */; };
+		DE1AAF192DE1083C0078FF7B /* Resolver-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = DE1AAF182DE1083C0078FF7B /* Resolver-Dynamic */; };
+		DE1AAF1A2DE1083C0078FF7B /* Resolver-Dynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = DE1AAF182DE1083C0078FF7B /* Resolver-Dynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DE1AAF072DE1057C0078FF7B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE076BF72DDE1971008970FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE076BFE2DDE1971008970FC;
+			remoteInfo = CoinWatch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DE1AAF1B2DE1083C0078FF7B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DE1AAF1A2DE1083C0078FF7B /* Resolver-Dynamic in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		DE076BFF2DDE1971008970FC /* CoinWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE1AAF032DE1057C0078FF7B /* CoinWatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoinWatchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		DE076C012DDE1971008970FC /* CoinWatch */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = CoinWatch;
+			sourceTree = "<group>";
+		};
+		DE1AAF042DE1057C0078FF7B /* CoinWatchTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CoinWatchTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -27,7 +59,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE076C542DDE3540008970FC /* Resolver in Frameworks */,
+				DE1AAF162DE108330078FF7B /* Resolver-Dynamic in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE1AAF002DE1057C0078FF7B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE1AAF192DE1083C0078FF7B /* Resolver-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				DE076C012DDE1971008970FC /* CoinWatch */,
+				DE1AAF042DE1057C0078FF7B /* CoinWatchTests */,
+				DE1AAF172DE1083C0078FF7B /* Frameworks */,
 				DE076C002DDE1971008970FC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,8 +88,16 @@
 			isa = PBXGroup;
 			children = (
 				DE076BFF2DDE1971008970FC /* CoinWatch.app */,
+				DE1AAF032DE1057C0078FF7B /* CoinWatchTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		DE1AAF172DE1083C0078FF7B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -70,11 +120,36 @@
 			);
 			name = CoinWatch;
 			packageProductDependencies = (
-				DE076C532DDE3540008970FC /* Resolver */,
+				DE1AAF152DE108330078FF7B /* Resolver-Dynamic */,
 			);
 			productName = CoinWatch;
 			productReference = DE076BFF2DDE1971008970FC /* CoinWatch.app */;
 			productType = "com.apple.product-type.application";
+		};
+		DE1AAF022DE1057C0078FF7B /* CoinWatchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE1AAF092DE1057C0078FF7B /* Build configuration list for PBXNativeTarget "CoinWatchTests" */;
+			buildPhases = (
+				DE1AAEFF2DE1057C0078FF7B /* Sources */,
+				DE1AAF002DE1057C0078FF7B /* Frameworks */,
+				DE1AAF012DE1057C0078FF7B /* Resources */,
+				DE1AAF1B2DE1083C0078FF7B /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DE1AAF082DE1057C0078FF7B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				DE1AAF042DE1057C0078FF7B /* CoinWatchTests */,
+			);
+			name = CoinWatchTests;
+			packageProductDependencies = (
+				DE1AAF182DE1083C0078FF7B /* Resolver-Dynamic */,
+			);
+			productName = CoinWatchTests;
+			productReference = DE1AAF032DE1057C0078FF7B /* CoinWatchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -89,6 +164,11 @@
 					DE076BFE2DDE1971008970FC = {
 						CreatedOnToolsVersion = 16.3;
 					};
+					DE1AAF022DE1057C0078FF7B = {
+						CreatedOnToolsVersion = 16.3;
+						LastSwiftMigration = 1630;
+						TestTargetID = DE076BFE2DDE1971008970FC;
+					};
 				};
 			};
 			buildConfigurationList = DE076BFA2DDE1971008970FC /* Build configuration list for PBXProject "CoinWatch" */;
@@ -101,7 +181,7 @@
 			mainGroup = DE076BF62DDE1971008970FC;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				DE076C522DDE3540008970FC /* XCRemoteSwiftPackageReference "Resolver" */,
+				DE1AAF142DE108330078FF7B /* XCRemoteSwiftPackageReference "Resolver" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DE076C002DDE1971008970FC /* Products */;
@@ -109,12 +189,20 @@
 			projectRoot = "";
 			targets = (
 				DE076BFE2DDE1971008970FC /* CoinWatch */,
+				DE1AAF022DE1057C0078FF7B /* CoinWatchTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		DE076BFD2DDE1971008970FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE1AAF012DE1057C0078FF7B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -131,7 +219,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DE1AAEFF2DE1057C0078FF7B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DE1AAF082DE1057C0078FF7B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DE076BFE2DDE1971008970FC /* CoinWatch */;
+			targetProxy = DE1AAF072DE1057C0078FF7B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		DE076C082DDE1972008970FC /* Debug */ = {
@@ -311,6 +414,45 @@
 			};
 			name = Release;
 		};
+		DE1AAF0A2DE1057C0078FF7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 88P363PJC9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiarash.vosough.CoinWatchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoinWatch.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CoinWatch";
+			};
+			name = Debug;
+		};
+		DE1AAF0B2DE1057C0078FF7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 88P363PJC9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiarash.vosough.CoinWatchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoinWatch.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CoinWatch";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -332,10 +474,19 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		DE1AAF092DE1057C0078FF7B /* Build configuration list for PBXNativeTarget "CoinWatchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE1AAF0A2DE1057C0078FF7B /* Debug */,
+				DE1AAF0B2DE1057C0078FF7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DE076C522DDE3540008970FC /* XCRemoteSwiftPackageReference "Resolver" */ = {
+		DE1AAF142DE108330078FF7B /* XCRemoteSwiftPackageReference "Resolver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Resolver";
 			requirement = {
@@ -346,10 +497,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DE076C532DDE3540008970FC /* Resolver */ = {
+		DE1AAF152DE108330078FF7B /* Resolver-Dynamic */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DE076C522DDE3540008970FC /* XCRemoteSwiftPackageReference "Resolver" */;
-			productName = Resolver;
+			package = DE1AAF142DE108330078FF7B /* XCRemoteSwiftPackageReference "Resolver" */;
+			productName = "Resolver-Dynamic";
+		};
+		DE1AAF182DE1083C0078FF7B /* Resolver-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE1AAF142DE108330078FF7B /* XCRemoteSwiftPackageReference "Resolver" */;
+			productName = "Resolver-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

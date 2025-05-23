@@ -16,4 +16,6 @@ extension CoinListUseCaseStub: CoinListUseCaseProtocol {
     var statePublisher: AnyPublisher<CoinListStates, Never> { Just(state).eraseToAnyPublisher() }
 
     func initialize() {}
+    
+    func retry() async throws {}
 }

@@ -12,4 +12,6 @@ protocol CoinListUseCaseProtocol {
     var statePublisher: AnyPublisher<CoinListStates, Never> { get }
 
     func initialize()
+    
+    func retry() async throws
 }

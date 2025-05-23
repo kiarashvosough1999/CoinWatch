@@ -9,9 +9,21 @@ import SwiftUI
 
 @main
 struct CoinWatchApp: App {
+    
+    private var isNonTestEnvironMent: Bool {
+        NSClassFromString("XCTestCase") == nil
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if isNonTestEnvironMent {
+                NavigationStack {
+                    CoinListView()
+                        .navigationDestination(for: Date.self) { date in
+                            CoinDetailsView(date: date)
+                        }
+                }
+            }
         }
     }
 }
