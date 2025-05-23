@@ -15,14 +15,20 @@ struct CoinView: View {
         VStack(alignment: .leading, spacing: 4) {
             HStack(alignment: .center, spacing: 8) {
                 Image(systemName: "bitcoinsign.circle.fill")
+                    .foregroundStyle(.yellow)
                 Text(coin.symbol)
+                    .font(.subheadline)
                 Text(coin.date, style: .date)
-                    .font(.footnote)
+                    .font(.caption2)
                 Spacer()
-                Text(coin.price, format: .currency(code: "USD"))
-                    .font(.headline)
-                    .contentTransition(.numericText())
-                    .animation(.easeInOut, value: coin.price)
+                Text(
+                    coin.price,
+                    format: .currency(code: "USD")
+                        .precision(.fractionLength(0))
+                )
+                .font(.headline.monospacedDigit().bold())
+                .contentTransition(.numericText())
+                .animation(.easeInOut, value: coin.price)
             }
         }
     }

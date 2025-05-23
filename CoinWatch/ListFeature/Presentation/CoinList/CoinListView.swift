@@ -43,7 +43,7 @@ struct CoinListView: View {
                 }
             }
         }
-        .listStyle(.grouped)
+        .listStyle(.insetGrouped)
     }
 
     @ViewBuilder
@@ -56,8 +56,20 @@ struct CoinListView: View {
 
 #Preview {
     WithDepedencies {
-        Resolver.register(CoinListUseCaseProtocol.self) { (resolver: Resolver, args: Resolver.Args) in
-            CoinListUseCaseStub(state: args())
+        Resolver.register(CoinListUseCaseProtocol.self) {
+            CoinListUseCaseStub(
+                state: .loaded(
+                    coins: stride(from: 0, to: 10, by: 1)
+                        .map { index in
+                            CoinEntity(
+                                id: index.description,
+                                symbol: "BTC",
+                                price: .random(in: 100_000...200_200),
+                                date: .now
+                            )
+                        }
+                )
+            )
         }
     } content: {
         CoinListView()
