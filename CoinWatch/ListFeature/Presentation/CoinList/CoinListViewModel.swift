@@ -15,11 +15,15 @@ final class CoinListViewModel: ObservableObject {
     @Published private(set) var state: CoinListStates = .idle
 
     init() {
+        listUseCase
+            .statePublisher
+            .assign(to: &$state)
         listUseCase.initialize()
     }
     
     func onTapRetry() {
-        Task {
+        Task.detached(priority: .userInitiated) {
+            @LazyInjected var listUseCase: CoinListUseCaseProtocol
             do {
                 try await listUseCase.retry()
             } catch {

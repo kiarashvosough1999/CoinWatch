@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 
 struct CoinDetailUseCaseStub {
     let state: CoinDetailStates
@@ -16,4 +17,6 @@ extension CoinDetailUseCaseStub: CoinDetailUseCaseProtocol {
     var statePublisher: AnyPublisher<CoinDetailStates, Never> { Just(state).eraseToAnyPublisher() }
 
     func initialize(date: Date) {}
+
+    func retry() async throws {}
 }

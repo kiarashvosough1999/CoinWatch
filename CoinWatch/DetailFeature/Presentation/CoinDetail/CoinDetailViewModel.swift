@@ -18,11 +18,15 @@ final class CoinDetailViewModel: ObservableObject {
 
     init(date: Date) {
         self.date = date
+        detailUseCase
+            .statePublisher
+            .assign(to: &$state)
         detailUseCase.initialize(date: date)
     }
 
     func onTapRetry() {
-        Task {
+        Task.detached(priority: .userInitiated) {
+            @LazyInjected var detailUseCase: CoinDetailUseCaseProtocol
             do {
                 try await detailUseCase.retry()
             } catch {
