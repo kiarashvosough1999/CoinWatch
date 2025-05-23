@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct CoinWatchApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                CoinListView()
+                    .navigationDestination(for: Date.self) { date in
+                        CoinDetailsView(date: date)
+                    }
+            }
         }
     }
 }

@@ -5,9 +5,11 @@
 //  Created by Kiarash Vosough on 21.05.25.
 //
 
-enum CoinDetailStates: Equatable {
+import Foundation
+
+enum CoinDetailStates {
     case idle
     case loading
-    case loaded(coins: [CoinDetailEntity])
-    case error
+    case loaded(coin: CoinDetailEntity)
+    case error(error: LocalizedError)
 }

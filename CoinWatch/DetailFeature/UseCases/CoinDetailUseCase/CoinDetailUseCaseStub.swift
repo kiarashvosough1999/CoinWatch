@@ -15,5 +15,5 @@ extension CoinDetailUseCaseStub: CoinDetailUseCaseProtocol {
 
     var statePublisher: AnyPublisher<CoinDetailStates, Never> { Just(state).eraseToAnyPublisher() }
 
-    func initialize() {}
+    func initialize(date: Date) {}
 }
