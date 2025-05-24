@@ -50,6 +50,7 @@ struct CoinListView: View {
                             CoinEntity(
                                 id: index.description,
                                 symbol: "BTC",
+                                currency: "EUR",
                                 price: .random(in: 100_000...200_200),
                                 date: .now
                             )

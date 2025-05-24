@@ -21,6 +21,7 @@ final class CoinDetailViewModel: ObservableObject {
         self.date = date
         detailUseCase
             .statePublisher
+            .receive(on: DispatchQueue.main)
             .assign(to: &$state)
         detailUseCase.initialize(date: date)
     }

@@ -30,18 +30,21 @@ extension CoinListUseCaseImpl: CoinListUseCaseProtocol {
 
     func initialize() {
         stateSubject.send(.loading)
-        cancellable = Timer
+        @LazyInjected var coinListRepository: CoinListRepositoryProtocol
+        let InitialPublisher = coinListRepository
+            .fetchCoinList(
+                coinName: "bitcoin",
+                dayInterval: 14,
+                currencyCode: "EUR"
+            )
+        
+         let refreshPublisher = Timer
             .publish(every: 60, on: RunLoop.main, in: .common)
             .autoconnect()
             .flatMap { _ in
-                @LazyInjected var coinListRepository: CoinListRepositoryProtocol
-                return coinListRepository
-                    .fetchCoinList(
-                        coinName: "bitcoin",
-                        dayInterval: 14,
-                        currencyCode: "eur"
-                    )
+                InitialPublisher
             }
+        cancellable = Publishers.Merge(InitialPublisher, refreshPublisher)
             .sink { [weak stateSubject] completion in
                 guard let stateSubject else { return }
                 switch completion {
@@ -62,7 +65,7 @@ extension CoinListUseCaseImpl: CoinListUseCaseProtocol {
                 guard let stateSubject else { return }
                 stateSubject.send(
                     .loaded(
-                        coins: coins
+                        coins: coins.sorted(by: { $0.date > $1.date })
                     )
                 )
             }

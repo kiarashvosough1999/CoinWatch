@@ -23,7 +23,7 @@ struct CoinView: View {
                 Spacer()
                 Text(
                     coin.price,
-                    format: .currency(code: "USD")
+                    format: .currency(code: coin.currency)
                         .precision(.fractionLength(0))
                 )
                 .font(.headline.monospacedDigit().bold())
@@ -42,6 +42,7 @@ extension CoinView: Equatable {}
         coin: CoinEntity(
             id: "id",
             symbol: "BTC",
+            currency: "EUR",
             price: price,
             date: .now
         )

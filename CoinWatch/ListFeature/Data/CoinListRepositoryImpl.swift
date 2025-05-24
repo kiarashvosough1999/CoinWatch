@@ -41,8 +41,9 @@ extension CoinListRepositoryImpl: CoinListRepositoryProtocol {
                     return CoinEntity(
                         id: time.description,
                         symbol: coinName,
+                        currency: currencyCode,
                         price: price,
-                        date: Date(timeIntervalSince1970: time)
+                        date: Date(timeIntervalSince1970: TimeInterval(time) / 1_000)
                     )
                 }
             }

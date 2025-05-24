@@ -17,6 +17,7 @@ final class CoinListViewModel: ObservableObject {
     init() {
         listUseCase
             .statePublisher
+            .receive(on: DispatchQueue.main)
             .assign(to: &$state)
         listUseCase.initialize()
     }
