@@ -6,10 +6,12 @@
 //
 
 import Resolver
+import Foundation
 
 extension Resolver: @retroactive ResolverRegistering {
 
     public static func registerAllServices() {
+        guard NSClassFromString("XCTestCase") == nil else { return }
         Resolver.register(CoinListRepositoryProtocol.self) {
             CoinListRepositoryImpl()
         }

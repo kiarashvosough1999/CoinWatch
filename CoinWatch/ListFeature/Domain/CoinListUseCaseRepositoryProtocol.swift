@@ -24,8 +24,8 @@ struct CoinListRepositoryStub: CoinListRepositoryProtocol {
         dayInterval: UInt,
         currencyCode: String
     ) -> AnyPublisher<[CoinEntity], any Error> {
-        Future { yeild in
-            yeild(.success(coins))
+        Future { yield in
+            yield(.success(coins))
         }
         .eraseToAnyPublisher()
     }

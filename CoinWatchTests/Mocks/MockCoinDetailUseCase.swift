@@ -5,8 +5,8 @@
 //  Created by Kiarash Vosough on 23.05.25.
 //
 
-import XCTest
 import Combine
+import Foundation
 @testable import CoinWatch
 
 final class MockCoinDetailUseCase: CoinDetailUseCaseProtocol {

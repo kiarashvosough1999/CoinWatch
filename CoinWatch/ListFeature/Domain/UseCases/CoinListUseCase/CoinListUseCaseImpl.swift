@@ -37,8 +37,8 @@ extension CoinListUseCaseImpl: CoinListUseCaseProtocol {
                 dayInterval: 14,
                 currencyCode: "EUR"
             )
-        
-         let refreshPublisher = Timer
+
+        let refreshPublisher = Timer
             .publish(every: 60, on: RunLoop.main, in: .common)
             .autoconnect()
             .flatMap { _ in

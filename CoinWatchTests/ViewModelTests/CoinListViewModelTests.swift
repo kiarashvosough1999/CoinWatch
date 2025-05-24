@@ -59,8 +59,8 @@ final class CoinListViewModelTests: XCTestCase {
         mockUseCase.send(.loading)
 
         let sampleCoins = [
-            CoinEntity(id: "1", symbol: "BTC", price: 100, date: .now),
-            CoinEntity(id: "2", symbol: "BTC", price: 200, date: .now.addingTimeInterval(3600 * 100))
+            CoinEntity(id: "1", symbol: "BTC", currency: "EUR", price: 100, date: .now),
+            CoinEntity(id: "2", symbol: "BTC", currency: "EUR", price: 200, date: .now.addingTimeInterval(3600 * 100))
         ]
         mockUseCase.send(.loaded(coins: sampleCoins))
         
@@ -80,19 +80,44 @@ final class CoinListViewModelTests: XCTestCase {
         }
     }
     
-    func testOnTapRetry_callsRetryAndEmitsErrorState() async {
-        var receivedErrorState: ErrorViewState?
+    func testOnTapRetry_callsRetryAndEmitsErrorState() {
+        let expectation = XCTestExpectation()
+        expectation.expectedFulfillmentCount = 3
+
+        var states: [CoinListStates] = []
         viewModel
-            .$errorState
-            .compactMap { $0 }
+            .$state
             .sink {
-                receivedErrorState = $0
+                states.append($0)
+                expectation.fulfill()
             }
             .store(in: &cancellables)
+
+        mockUseCase.send(.loading)
         
-        await viewModel.onTapRetry()
+        let retryExpectation = XCTestExpectation()
+        retryExpectation.expectedFulfillmentCount = 1
         
-        XCTAssertTrue(mockUseCase.retryCalled)
-        XCTAssertEqual(receivedErrorState, .custom(MockError.testFailure.failureReason!, canRetry: false))
+        mockUseCase.send(.error(MockError.testFailure, retry: { retryExpectation.fulfill() }))
+        
+        wait(for: [expectation], timeout: 2)
+        
+        for (index, state) in states.enumerated() {
+            switch state {
+            case .idle:
+                XCTAssertEqual(index, 0, "Expected .idle at index 0")
+            case .loading:
+                XCTAssertEqual(index, 1, "Expected .loading at index 1")
+            case .loaded:
+                XCTFail("Expected .error at index 2")
+            case .error(let error, let retry):
+                let mockError = error as? MockError
+                XCTAssertNotNil(mockError, "Expected .error at index 2")
+                XCTAssertEqual(mockError, MockError.testFailure, "Expected .error at index 2")
+                retry()
+            }
+        }
+        
+        wait(for: [retryExpectation], timeout: 2)
     }
 }

@@ -8,6 +8,9 @@
 import Foundation
 
 enum MockError: LocalizedError {
+
     case testFailure
+    case networkError
+
     var failureReason: String? { "Test failure" }
 }
