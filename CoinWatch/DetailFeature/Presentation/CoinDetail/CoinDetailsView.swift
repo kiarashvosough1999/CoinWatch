@@ -34,6 +34,7 @@ struct CoinDetailsView: View {
     private func coinDetail(_ coin: CoinDetailEntity) -> some View {
         List {
             CoinDetailView(coin: coin)
+                .equatable()
         }
         .listStyle(.insetGrouped)
     }
