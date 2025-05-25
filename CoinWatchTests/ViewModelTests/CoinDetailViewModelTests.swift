@@ -12,7 +12,7 @@ import Resolver
 
 final class CoinDetailViewModelTests: XCTestCase {
 
-    private var viewModel: CoinDetailViewModel!
+    private var sut: CoinDetailViewModel!
     private var mockUseCase: MockCoinDetailUseCase!
     private var cancellables: Set<AnyCancellable>!
     private let testDate = Date(timeIntervalSince1970: 1_000_000)
@@ -21,20 +21,20 @@ final class CoinDetailViewModelTests: XCTestCase {
         super.setUp()
         mockUseCase = MockCoinDetailUseCase()
         Resolver.register { self.mockUseCase as CoinDetailUseCaseProtocol }
-        viewModel = CoinDetailViewModel(date: testDate)
+        sut = CoinDetailViewModel(date: testDate)
         cancellables = []
     }
 
     override func tearDown() {
         cancellables = nil
-        viewModel = nil
+        sut = nil
         mockUseCase = nil
         Resolver.reset()
         super.tearDown()
     }
 
     func testInitialStateIsIdle() {
-        switch viewModel.state {
+        switch sut.state {
         case .idle:
             break
         case .loading, .loaded, .error:
@@ -47,7 +47,7 @@ final class CoinDetailViewModelTests: XCTestCase {
         expectation.expectedFulfillmentCount = 3
 
         var states: [CoinDetailStates] = []
-        viewModel
+        sut
             .$state
             .sink { state in
                 states.append(state)
@@ -83,17 +83,44 @@ final class CoinDetailViewModelTests: XCTestCase {
         }
     }
 
-    func testOnTapRetry_callsRetryAndEmitsErrorState() async {
-        var receivedErrorState: ErrorViewState?
-        viewModel
-            .$errorState
-            .compactMap { $0 }
-            .sink { receivedErrorState = $0 }
+    func testOnTapRetry_callsRetryAndEmitsErrorState() {
+        let expectation = XCTestExpectation()
+        expectation.expectedFulfillmentCount = 3
+
+        var states: [CoinDetailStates] = []
+        sut
+            .$state
+            .sink {
+                states.append($0)
+                expectation.fulfill()
+            }
             .store(in: &cancellables)
 
-        await viewModel.onTapRetry()
-
-        XCTAssertTrue(mockUseCase.retryCalled)
-        XCTAssertEqual(receivedErrorState, .custom(MockError.testFailure.failureReason!, canRetry: false))
+        mockUseCase.send(.loading)
+        
+        let retryExpectation = XCTestExpectation()
+        retryExpectation.expectedFulfillmentCount = 1
+        
+        mockUseCase.send(.error(error: MockError.testFailure, retry: { retryExpectation.fulfill() }))
+        
+        wait(for: [expectation], timeout: 2)
+        
+        for (index, state) in states.enumerated() {
+            switch state {
+            case .idle:
+                XCTAssertEqual(index, 0, "Expected .idle at index 0")
+            case .loading:
+                XCTAssertEqual(index, 1, "Expected .loading at index 1")
+            case .loaded:
+                XCTFail("Expected .error at index 2")
+            case .error(let error, let retry):
+                let mockError = error as? MockError
+                XCTAssertNotNil(mockError, "Expected .error at index 2")
+                XCTAssertEqual(mockError, MockError.testFailure, "Expected .error at index 2")
+                retry()
+            }
+        }
+        
+        wait(for: [retryExpectation], timeout: 2)
     }
 }

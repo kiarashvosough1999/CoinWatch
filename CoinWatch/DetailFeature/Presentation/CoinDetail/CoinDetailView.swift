@@ -32,11 +32,12 @@ struct CoinDetailView: View {
         HStack(alignment: .center, spacing: 8) {
             Image(systemName: "bitcoinsign.circle.fill")
                 .font(.title3)
+                .foregroundStyle(.yellow)
             Text(coin.symbol)
                 .font(.headline)
                 .bold()
             Spacer()
-            Text.init(coin.date, style: .date)
+            Text(coin.date, style: .date)
                 .font(.footnote)
         }
         .font(.title3)
@@ -55,7 +56,7 @@ extension CoinDetailView: Equatable {}
                 date: .now,
                 prices: stride(from: 1, to: 10, by: 1)
                     .map { index in
-                        CoinDetailEntity.Price(id: "\(index)", price: index * price, cuurency: "USD")
+                        CoinDetailEntity.Price(id: "\(index)", price: index * price, currency: "USD")
                     }
             )
         )

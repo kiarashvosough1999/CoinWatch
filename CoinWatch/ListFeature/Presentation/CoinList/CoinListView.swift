@@ -21,16 +21,9 @@ struct CoinListView: View {
                 ProgressView()
             case .loaded(let coins):
                 coinList(coins)
-            case .error(let error):
-                ErrorView(state: .from(error, canRetry: true)) {
-                    Task {
-                        await viewModel.onTapRetry()
-                    }
-                }
+            case .error(let error, let retry):
+                ErrorView(state: .from(error, canRetry: true), onTapRetry: retry)
             }
-        }
-        .overlay {
-            errorView
         }
     }
 
@@ -43,21 +36,27 @@ struct CoinListView: View {
                 }
             }
         }
-        .listStyle(.grouped)
-    }
-
-    @ViewBuilder
-    private var errorView: some View {
-        if let errorState = viewModel.errorState {
-            ErrorView(state: errorState, onTapRetry: {})
-        }
+        .listStyle(.insetGrouped)
     }
 }
 
 #Preview {
     WithDepedencies {
-        Resolver.register(CoinListUseCaseProtocol.self) { (resolver: Resolver, args: Resolver.Args) in
-            CoinListUseCaseStub(state: args())
+        Resolver.register(CoinListUseCaseProtocol.self) {
+            CoinListUseCaseStub(
+                state: .loaded(
+                    coins: stride(from: 0, to: 10, by: 1)
+                        .map { index in
+                            CoinEntity(
+                                id: index.description,
+                                symbol: "BTC",
+                                currency: "EUR",
+                                price: .random(in: 100_000...200_200),
+                                date: .now
+                            )
+                        }
+                )
+            )
         }
     } content: {
         CoinListView()

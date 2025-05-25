@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DE1AAF162DE108330078FF7B /* Resolver-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = DE1AAF152DE108330078FF7B /* Resolver-Dynamic */; };
-		DE1AAF192DE1083C0078FF7B /* Resolver-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = DE1AAF182DE1083C0078FF7B /* Resolver-Dynamic */; };
-		DE1AAF1A2DE1083C0078FF7B /* Resolver-Dynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = DE1AAF182DE1083C0078FF7B /* Resolver-Dynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		DE1AAF712DE1305E0078FF7B /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = DE1AAF702DE1305E0078FF7B /* Resolver */; };
+		DE1AAF732DE130640078FF7B /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = DE1AAF722DE130640078FF7B /* Resolver */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,7 +28,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				DE1AAF1A2DE1083C0078FF7B /* Resolver-Dynamic in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE1AAF162DE108330078FF7B /* Resolver-Dynamic in Frameworks */,
+				DE1AAF732DE130640078FF7B /* Resolver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,7 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE1AAF192DE1083C0078FF7B /* Resolver-Dynamic in Frameworks */,
+				DE1AAF712DE1305E0078FF7B /* Resolver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +118,7 @@
 			);
 			name = CoinWatch;
 			packageProductDependencies = (
-				DE1AAF152DE108330078FF7B /* Resolver-Dynamic */,
+				DE1AAF722DE130640078FF7B /* Resolver */,
 			);
 			productName = CoinWatch;
 			productReference = DE076BFF2DDE1971008970FC /* CoinWatch.app */;
@@ -145,7 +143,7 @@
 			);
 			name = CoinWatchTests;
 			packageProductDependencies = (
-				DE1AAF182DE1083C0078FF7B /* Resolver-Dynamic */,
+				DE1AAF702DE1305E0078FF7B /* Resolver */,
 			);
 			productName = CoinWatchTests;
 			productReference = DE1AAF032DE1057C0078FF7B /* CoinWatchTests.xctest */;
@@ -373,6 +371,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -401,6 +400,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -423,6 +423,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 88P363PJC9;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kiarash.vosough.CoinWatchTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -443,6 +444,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 88P363PJC9;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kiarash.vosough.CoinWatchTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -497,15 +499,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DE1AAF152DE108330078FF7B /* Resolver-Dynamic */ = {
+		DE1AAF702DE1305E0078FF7B /* Resolver */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DE1AAF142DE108330078FF7B /* XCRemoteSwiftPackageReference "Resolver" */;
-			productName = "Resolver-Dynamic";
+			productName = Resolver;
 		};
-		DE1AAF182DE1083C0078FF7B /* Resolver-Dynamic */ = {
+		DE1AAF722DE130640078FF7B /* Resolver */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DE1AAF142DE108330078FF7B /* XCRemoteSwiftPackageReference "Resolver" */;
-			productName = "Resolver-Dynamic";
+			productName = Resolver;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

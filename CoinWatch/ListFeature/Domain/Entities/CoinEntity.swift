@@ -10,6 +10,7 @@ import Foundation
 struct CoinEntity: Identifiable {
     let id: String
     let symbol: String
+    let currency: String
     let price: Double
     let date: Date
 }

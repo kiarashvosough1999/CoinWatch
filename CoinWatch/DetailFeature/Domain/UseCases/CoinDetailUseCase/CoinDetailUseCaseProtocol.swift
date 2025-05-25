@@ -13,6 +13,4 @@ protocol CoinDetailUseCaseProtocol {
     var statePublisher: AnyPublisher<CoinDetailStates, Never> { get }
 
     func initialize(date: Date)
-    
-    func retry() async throws
 }
