@@ -14,20 +14,30 @@ final class CoinListRepositoryImpl {
 
 extension CoinListRepositoryImpl: CoinListRepositoryProtocol {
 
+    enum Errors: LocalizedError {
+        case invalidParameters
+        case invalidToken
+    }
+
     func fetchCoinList(
         coinName: String,
         dayInterval: UInt,
         currencyCode: String
     ) -> AnyPublisher<[CoinEntity], any Error> {
+        guard let token = Bundle.main.object(forInfoDictionaryKey: "API_CLIENT_Token") as? String else {
+            return Fail(error: Errors.invalidToken)
+                .eraseToAnyPublisher()
+        }
         let url = URL(
-            string: "https://api.coingecko.com/api/v3/coins/\(coinName)/market_chart?vs_currency=\(currencyCode)&days=\(dayInterval)&interval=daily&x-cg-api-key=CG-Z6ZCRV8daftALunUVTA4tpS9"
-        )!
+            string: "https://api.coingecko.com/api/v3/coins/\(coinName)/market_chart?vs_currency=\(currencyCode)&days=\(dayInterval)&interval=daily&x-cg-api-key=\(token)"
+        )
+        guard let url else {
+            return Fail(error: Errors.invalidParameters)
+                .eraseToAnyPublisher()
+        }
+
         struct Coin: Codable {
             let prices: [[Double]]
-
-            enum CodingKeys: String, CodingKey {
-                case prices
-            }
         }
         return URLSession
             .shared
