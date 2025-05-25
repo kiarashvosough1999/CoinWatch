@@ -12,7 +12,7 @@ import Resolver
 
 final class CoinListViewModelTests: XCTestCase {
 
-    private var viewModel: CoinListViewModel!
+    private var sut: CoinListViewModel!
     private var mockUseCase: MockCoinListUseCase!
     private var cancellables: Set<AnyCancellable>!
     
@@ -22,20 +22,20 @@ final class CoinListViewModelTests: XCTestCase {
         Resolver.register(CoinListUseCaseProtocol.self) {
             self.mockUseCase
         }
-        viewModel = CoinListViewModel()
+        sut = CoinListViewModel()
         cancellables = []
     }
     
     override func tearDown() {
         cancellables = nil
-        viewModel = nil
+        sut = nil
         mockUseCase = nil
         Resolver.reset()
         super.tearDown()
     }
     
     func testInitialStateIsIdle() {
-        switch viewModel.state {
+        switch sut.state {
         case .idle:
             break
         case .loading, .loaded, .error:
@@ -48,7 +48,7 @@ final class CoinListViewModelTests: XCTestCase {
         expectation.expectedFulfillmentCount = 3
 
         var states: [CoinListStates] = []
-        viewModel
+        sut
             .$state
             .sink {
                 states.append($0)
@@ -85,7 +85,7 @@ final class CoinListViewModelTests: XCTestCase {
         expectation.expectedFulfillmentCount = 3
 
         var states: [CoinListStates] = []
-        viewModel
+        sut
             .$state
             .sink {
                 states.append($0)

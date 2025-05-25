@@ -20,7 +20,7 @@ extension CoinListRepositoryImpl: CoinListRepositoryProtocol {
         currencyCode: String
     ) -> AnyPublisher<[CoinEntity], any Error> {
         let url = URL(
-            string: "https://api.coingecko.com/api/v3/coins/\(coinName)/market_chart?vs_currency=\(currencyCode)&days=\(dayInterval)&interval=daily"
+            string: "https://api.coingecko.com/api/v3/coins/\(coinName)/market_chart?vs_currency=\(currencyCode)&days=\(dayInterval)&interval=daily&x-cg-api-key=CG-Z6ZCRV8daftALunUVTA4tpS9"
         )!
         struct Coin: Codable {
             let prices: [[Double]]
@@ -32,7 +32,7 @@ extension CoinListRepositoryImpl: CoinListRepositoryProtocol {
         return URLSession
             .shared
             .dataTaskPublisher(for: url)
-            .tryMap { (data: Data, response: URLResponse) in
+            .tryMap { (data: Data, _) in
                 try JSONDecoder().decode(Coin.self, from: data)
             }
             .map { coins in

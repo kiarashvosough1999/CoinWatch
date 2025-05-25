@@ -12,7 +12,7 @@ protocol CoinListRepositoryProtocol {
         coinName: String,
         dayInterval: UInt,
         currencyCode: String
-    ) -> AnyPublisher<[CoinEntity], Error>
+    ) -> AnyPublisher<[CoinEntity], any Error>
 }
 
 struct CoinListRepositoryStub: CoinListRepositoryProtocol {

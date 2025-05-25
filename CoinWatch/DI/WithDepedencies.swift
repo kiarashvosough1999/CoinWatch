@@ -13,6 +13,7 @@ struct WithDepedencies<C: View>: View {
     private let content: () -> C
 
     init(register: () -> Void, content: @escaping () -> C) {
+        Resolver.reset()
         register()
         self.content = content
     }

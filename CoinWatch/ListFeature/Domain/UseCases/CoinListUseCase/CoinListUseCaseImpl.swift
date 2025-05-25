@@ -29,6 +29,7 @@ extension CoinListUseCaseImpl: CoinListUseCaseProtocol {
     }
 
     func initialize() {
+        cancellable = nil
         stateSubject.send(.loading)
         @LazyInjected var coinListRepository: CoinListRepositoryProtocol
         let InitialPublisher = coinListRepository
@@ -49,7 +50,7 @@ extension CoinListUseCaseImpl: CoinListUseCaseProtocol {
                 guard let stateSubject else { return }
                 switch completion {
                 case .finished:
-                    stateSubject.send(.idle)
+                    break
                 case .failure:
                     stateSubject.send(
                         .error(
@@ -63,9 +64,23 @@ extension CoinListUseCaseImpl: CoinListUseCaseProtocol {
                 }
             } receiveValue: { [weak stateSubject] coins in
                 guard let stateSubject else { return }
+
+                func filterNewestPerDay(from coins: [CoinEntity]) -> [CoinEntity] {
+                    let calendar = Calendar.current
+
+                    let grouped = Dictionary(grouping: coins) { coin in
+                        calendar.startOfDay(for: coin.date)
+                    }
+
+                    let newestPerDay = grouped.compactMapValues { coinsOnSameDay in
+                        coinsOnSameDay.max(by: { $0.date > $1.date })
+                    }
+
+                    return newestPerDay.values.sorted(by: { $0.date > $1.date })
+                }
                 stateSubject.send(
                     .loaded(
-                        coins: coins.sorted(by: { $0.date > $1.date })
+                        coins: filterNewestPerDay(from: coins)
                     )
                 )
             }

@@ -17,7 +17,7 @@ struct CoinDetailEntity: Identifiable {
     struct Price: Identifiable, Equatable {
         let id: String
         let price: Double
-        let cuurency: String
+        let currency: String
     }
 }
 

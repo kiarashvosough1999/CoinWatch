@@ -12,7 +12,7 @@ import Resolver
 
 final class CoinListUseCaseImplTests: XCTestCase {
 
-    private var useCase: CoinListUseCaseImpl!
+    private var sut: CoinListUseCaseImpl!
     private var mockRepository: MockCoinListRepository!
     private var cancellables: Set<AnyCancellable>!
 
@@ -20,13 +20,13 @@ final class CoinListUseCaseImplTests: XCTestCase {
         super.setUp()
         mockRepository = MockCoinListRepository()
         Resolver.register { self.mockRepository as CoinListRepositoryProtocol }
-        useCase = CoinListUseCaseImpl()
+        sut = CoinListUseCaseImpl()
         cancellables = []
     }
 
     override func tearDown() {
         cancellables = nil
-        useCase = nil
+        sut = nil
         mockRepository = nil
         Resolver.reset()
         super.tearDown()
@@ -37,7 +37,7 @@ final class CoinListUseCaseImplTests: XCTestCase {
         let expectation = XCTestExpectation(description: "state updates: idle, loading, loaded")
         expectation.expectedFulfillmentCount = 3
         var states: [CoinListStates] = []
-        useCase.statePublisher
+        sut.statePublisher
             .sink { state in
                 states.append(state)
                 expectation.fulfill()
@@ -45,7 +45,7 @@ final class CoinListUseCaseImplTests: XCTestCase {
             .store(in: &cancellables)
 
         // When
-        useCase.initialize()
+        sut.initialize()
         let sampleCoins = [
             CoinEntity(id: "1", symbol: "BTC", currency: "EUR", price: 100, date: Date(timeIntervalSince1970: 1000)),
             CoinEntity(id: "2", symbol: "ETH", currency: "EUR", price: 200, date: Date(timeIntervalSince1970: 2000))
@@ -75,7 +75,7 @@ final class CoinListUseCaseImplTests: XCTestCase {
         let expectation = XCTestExpectation(description: "state updates: idle, loading, error")
         expectation.expectedFulfillmentCount = 3
         var receivedErrorState: CoinListStates?
-        useCase.statePublisher
+        sut.statePublisher
             .sink { state in
                 if case .error = state {
                     receivedErrorState = state
@@ -85,7 +85,7 @@ final class CoinListUseCaseImplTests: XCTestCase {
             .store(in: &cancellables)
 
         // When
-        useCase.initialize()
+        sut.initialize()
         mockRepository.subject.send(completion: .failure(MockError.networkError))
 
         // Then
