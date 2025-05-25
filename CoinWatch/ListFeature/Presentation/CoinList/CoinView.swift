@@ -36,6 +36,7 @@ struct CoinView: View {
 
 extension CoinView: Equatable {}
 
+@available(iOS 17, *)
 #Preview {
     @Previewable @State var price: Double = 100000
     CoinView(
