@@ -17,7 +17,7 @@ extension CoinDetailRepositoryImpl: CoinDetailUseCaseRepositoryProtocol {
     enum Errors: LocalizedError {
         case invalidParameters
         case invalidResponse
-        
+        case invalidToken
     }
 
     func fetchDetail(
@@ -25,6 +25,10 @@ extension CoinDetailRepositoryImpl: CoinDetailUseCaseRepositoryProtocol {
         currencies: [String],
         on date: Date
     ) -> AnyPublisher<CoinDetailEntity, any Error> {
+        guard let token = Bundle.main.object(forInfoDictionaryKey: "API_CLIENT_Token") as? String else {
+            return Fail(error: Errors.invalidToken)
+                .eraseToAnyPublisher()
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
@@ -34,7 +38,7 @@ extension CoinDetailRepositoryImpl: CoinDetailUseCaseRepositoryProtocol {
         components?.queryItems = [
             URLQueryItem(name: "date", value: dateString),
             URLQueryItem(name: "localization", value: "false"),
-            URLQueryItem(name: "x-cg-api-key", value: "CG-Z6ZCRV8daftALunUVTA4tpS9")
+            URLQueryItem(name: "x-cg-api-key", value: token)
         ]
 
         guard let url = components?.url else {
