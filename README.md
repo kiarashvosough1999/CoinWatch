@@ -47,5 +47,5 @@ In CoinWatch each layer is defined inside a folder to lower the complexity(inste
 1. Install latest Xcode version.
 2. Clone the project and checkout to `development` branch.
 3. Open project.
-4. Have your iPhone connected to your mac machine.
+4. Have your iPhone connected to your mac machine(due to a bug on my mac, I wasn't able to run it on simulator, please ensure you run the App on a real device).
 5. Install the App on you machine by pushing run button and your iPhone selected as destination.
